@@ -41,6 +41,7 @@ axios
 */
 
 const followersArray = [
+  'rasmussenben',
   'tetondan',
   'dustinmyers',
   'justsml',
@@ -83,16 +84,14 @@ followersArray.forEach(data => {
     luishrd
     bigknell
 */
-
+const cards = document.querySelector('div.cards');
 
 function cardMaker(object) {
-
-  const cards = document.querySelector('div.cards');
 
   const card = document.createElement('div');
   const image = document.createElement('img');
   const cardInfo = document.createElement('div');
-  const usersName = document.createElement('h3');
+  const profileName = document.createElement('h3');
   const username = document.createElement('p');
   const location = document.createElement('p');
   const profile = document.createElement('p');
@@ -103,21 +102,24 @@ function cardMaker(object) {
 
   card.classList.add('card');
   cardInfo.classList.add('card-info');
-  usersName.classList.add('name');
+  profileName.classList.add('name');
   username.classList.add('username');
 
   image.src = object.avatar_url;
-  usersName.textContent = object.name;
+  profileName.textContent = object.name;
   username.textContent = object.login;
-  location.textContent = object.location;
-  followers.textContent = object.followers;
-  following.textContent = object.following;
-  bio.textContent = object.bio;
+  location.textContent = 'Location: ' + object.location;
+  profile.textContent = 'Profile: ' + profileLink;
+  profileLink.setAttribute('href', object.html_url);
+  profileLink.textContent = object.html_url;
+  followers.textContent = 'Followers: ' + object.followers;
+  following.textContent = 'Following: ' + object.following;
+  bio.textContent = 'Bio: ' + object.bio;
 
   cards.appendChild(card);
   card.appendChild(image);
   card.appendChild(cardInfo);
-  cardInfo.appendChild(usersName);
+  cardInfo.appendChild(profileName);
   cardInfo.appendChild(username);
   cardInfo.appendChild(location);
   cardInfo.appendChild(profile);
