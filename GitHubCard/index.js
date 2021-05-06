@@ -5,7 +5,6 @@ import axios from 'axios';
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-const cards = document.querySelector('div.cards');
 
 axios
   .get('https://api.github.com/users/RasmussenBen')
@@ -27,7 +26,7 @@ axios
 
 /*
   STEP 4: Pass the data received from Github into your function,
-    and append the returned markup to the DOM as a child of .cards
+    and appendChild the returned markup to the DOM as a child of .cards
 */
 
 /*
@@ -52,8 +51,7 @@ const followersArray = [
 followersArray.forEach(data => {
   axios.get(`https://api.github.com/users/${data}`)
   .then((res) => {
-    let followersData = res.data;
-    cards.append(cardMaker(followersData));
+    cardMaker(res.data);
   })
 });
 
@@ -86,7 +84,10 @@ followersArray.forEach(data => {
     bigknell
 */
 
+
 function cardMaker(object) {
+
+  const cards = document.querySelector('div.cards');
 
   const card = document.createElement('div');
   const image = document.createElement('img');
@@ -100,30 +101,30 @@ function cardMaker(object) {
   const following = document.createElement('p');
   const bio = document.createAttribute('p');
 
-  card.classList.add(card);
+  card.classList.add('card');
+  cardInfo.classList.add('card-info');
+  usersName.classList.add('name');
+  username.classList.add('username');
+
   image.src = object.avatar_url;
-  cardInfo.classList.add(cardInfo);
-  usersName.classList.add(usersName);
-  username.classList.add(username);
-  profileLink.href = object.html_url;
-
-  card.append(image);
-  card.append(cardInfo);
-  cardInfo.append(usersName);
-  cardInfo.append(username);
-  cardInfo.append(location);
-  cardInfo.append(profile);
-  profile.append(profileLink);
-  cardInfo.append(followers);
-  cardInfo.append(following);
-  cardInfo.append(bio);
-
   usersName.textContent = object.name;
   username.textContent = object.login;
   location.textContent = object.location;
   followers.textContent = object.followers;
   following.textContent = object.following;
   bio.textContent = object.bio;
+
+  cards.appendChild(card);
+  card.appendChild(image);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(usersName);
+  cardInfo.appendChild(username);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(profileLink);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
 
   return card;
 }
