@@ -91,9 +91,25 @@ function cardMaker(object) {
   cardInfo.classList.add(cardInfo);
   usersName.classList.add(usersName);
   username.classList.add(username);
-  location = object.location;
   profileLink.href = object.html_url;
-  
 
+  card.append(image);
+  card.append(cardInfo);
+  cardInfo.append(usersName);
+  cardInfo.append(username);
+  cardInfo.append(location);
+  cardInfo.append(profile);
+  profile.append(profileLink);
+  cardInfo.append(followers);
+  cardInfo.append(following);
+  cardInfo.append(bio);
 
+  usersName.textContent = data.name;
+  username.textContent = data.login;
+  location.textContent = data.location;
+  followers.textContent = data.followers;
+  following.textContent = data.following;
+  bio.textContent = data.bio;
+
+  return card;
 }
