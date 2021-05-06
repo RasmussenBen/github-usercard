@@ -5,7 +5,18 @@ import axios from 'axios';
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-const myGithub = axios.get('https://api.github.com/users/RasmussenBen');
+const cards = document.querySelector('div.cards');
+
+axios
+  .get('https://api.github.com/users/RasmussenBen')
+  .then((res => {
+    let userCard = res.data;
+    cards.appendChild(userCard);
+  }))
+  .catch((err) => {
+    console.log('error: failed to retrieve info', err);
+  });
+
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
